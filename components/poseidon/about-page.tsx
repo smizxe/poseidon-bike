@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Compass, Gem, ShieldCheck, Sparkles, Waves } from "lucide-react";
+import { Award, Compass, Gem, ShieldCheck, Waves } from "lucide-react";
 
 import { SectionHeading } from "@/components/poseidon/section-heading";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,16 +19,15 @@ export function AboutPage() {
             <div className="space-y-5">
               <div className="eyebrow">
                 <Waves className="size-3.5" />
-                Về chúng tôi
+                Về Poseidon
               </div>
               <h1 className="font-heading text-4xl leading-tight font-semibold tracking-tight md:text-6xl">
-                Một trang mẫu kể câu chuyện thương hiệu theo hướng tinh gọn và
-                đáng tin hơn.
+                Xe đạp chất lượng quốc tế, thiết kế cho người Việt
               </h1>
               <p className="max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
-                Thay vì chỉ liệt kê thông tin, trang này gom brand story, giá trị,
-                timeline phát triển và chuẩn chất lượng vào các block rõ ràng để dễ
-                cập nhật sau này.
+                Poseidon mang đến những chiếc xe đạp kết hợp giữa công nghệ
+                khung Magie tiên tiến, linh kiện Shimano chính hãng và mức giá
+                hợp lý — để mỗi hành trình đều đáng giá.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -41,7 +40,7 @@ export function AboutPage() {
                   href="/dai-ly"
                   className={`${outlineLinkClass} px-6`}
                 >
-                  Xem hệ thống đại lý
+                  Tìm đại lý gần bạn
                 </Link>
               </div>
             </div>
@@ -66,42 +65,42 @@ export function AboutPage() {
       <section className="section-shell py-20">
         <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
           <SectionHeading
-            eyebrow="Câu chuyện"
-            title="Poseidon được định hình như một thương hiệu xe đạp cân bằng giữa hiệu năng và thẩm mỹ"
-            description="Ngôn ngữ thiết kế xoay quanh đường nét gọn, màu sắc cảm hứng mặt nước và trải nghiệm chọn xe dễ hiểu với người dùng Việt Nam."
+            eyebrow="Câu chuyện thương hiệu"
+            title="Từ niềm đam mê xe đạp đến thương hiệu được hàng nghìn rider tin chọn"
+            description="Poseidon không chỉ bán xe — chúng tôi xây dựng một hệ sinh thái hoàn chỉnh từ sản phẩm, dịch vụ đến cộng đồng, giúp mỗi người tìm được chiếc xe phù hợp nhất."
           />
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="panel p-6">
               <Compass className="mb-4 size-10 text-primary" />
-              <h3 className="font-heading text-2xl font-semibold">Định vị rõ ràng</h3>
+              <h3 className="font-heading text-2xl font-semibold">Sứ mệnh rõ ràng</h3>
               <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                Tập trung vào các dòng xe dễ bán, dễ kể câu chuyện và dễ phân nhóm
-                theo nhu cầu sử dụng thực tế.
+                Đưa xe đạp chất lượng cao đến gần hơn với người Việt, phục vụ cả
+                nhu cầu đi lại hàng ngày lẫn đam mê thể thao.
               </p>
             </div>
             <div className="panel p-6">
               <Gem className="mb-4 size-10 text-primary" />
-              <h3 className="font-heading text-2xl font-semibold">Premium vừa đủ</h3>
+              <h3 className="font-heading text-2xl font-semibold">Chất lượng vượt tầm giá</h3>
               <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                Màu sắc, card, typography và tương phản được nâng cấp để nhìn sang
-                hơn nhưng vẫn phù hợp bán hàng.
+                Khung Magie đúc nguyên khối, groupset Shimano chính hãng, phanh
+                dầu — tất cả ở mức giá mà rider Việt dễ dàng tiếp cận.
               </p>
             </div>
             <div className="panel p-6">
               <ShieldCheck className="mb-4 size-10 text-primary" />
-              <h3 className="font-heading text-2xl font-semibold">Đáng tin cậy</h3>
+              <h3 className="font-heading text-2xl font-semibold">Bảo hành minh bạch</h3>
               <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                Thông tin bảo hành, vật liệu, network đại lý và process đều có nơi
-                trình bày riêng, tránh bị loãng.
+                Cam kết bảo hành khung xe 5 năm, linh kiện 12 tháng và hỗ trợ kỹ
+                thuật 24/7 qua hệ thống 120+ đại lý toàn quốc.
               </p>
             </div>
             <div className="panel p-6">
-              <Sparkles className="mb-4 size-10 text-primary" />
-              <h3 className="font-heading text-2xl font-semibold">Sẵn sàng mở rộng</h3>
+              <Award className="mb-4 size-10 text-primary" />
+              <h3 className="font-heading text-2xl font-semibold">Cộng đồng mạnh mẽ</h3>
               <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                Dễ cắm thêm block video, showroom, review, form đại lý hoặc CMS mà
-                không phải đập lại layout.
+                Hàng nghìn rider đã đồng hành cùng Poseidon trên mọi cung đường,
+                từ phố thị đến những cung đèo thử thách nhất.
               </p>
             </div>
           </div>
@@ -111,9 +110,9 @@ export function AboutPage() {
       <section className="section-shell pb-20">
         <div className="panel-dark overflow-hidden px-6 py-8 md:px-10">
           <SectionHeading
-            eyebrow="Pillars"
-            title="3 trụ cột đang định hình toàn bộ giao diện thương hiệu"
-            description="Mỗi trụ cột dưới đây có thể trở thành một block landing, một nhóm USP hoặc một module trong brochure điện tử."
+            eyebrow="Giá trị cốt lõi"
+            title="3 trụ cột tạo nên sự khác biệt của Poseidon"
+            description="Chất lượng linh kiện, công nghệ khung tiên tiến và cam kết hậu mãi dài hạn — đó là lý do hàng nghìn khách hàng đặt niềm tin ở Poseidon."
           />
 
           <div className="mt-10 grid gap-4 lg:grid-cols-3">
@@ -137,9 +136,9 @@ export function AboutPage() {
 
       <section className="section-shell pb-20">
         <SectionHeading
-          eyebrow="Timeline"
-          title="Trang mẫu có luôn một timeline để kể hành trình thương hiệu"
-          description="Block này hợp với website doanh nghiệp vì giúp phần Về chúng tôi có chiều sâu hơn và dễ tạo niềm tin hơn phần text đơn thuần."
+          eyebrow="Hành trình phát triển"
+          title="Từ ý tưởng đến thương hiệu xe đạp được yêu thích"
+          description="Mỗi cột mốc đánh dấu một bước tiến quan trọng trong hành trình mang xe đạp chất lượng đến tay người Việt."
           align="center"
         />
 

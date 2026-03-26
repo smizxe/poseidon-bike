@@ -263,115 +263,115 @@ export const newsItems = [
 
 export const brandPillars = [
   {
-    eyebrow: "Performance",
-    title: "Hiệu năng có thể cảm nhận được",
+    eyebrow: "Chất lượng",
+    title: "Linh kiện chính hãng, kiểm định rõ ràng",
     description:
-      "Từ geometry, vật liệu khung đến cấu hình truyền động đều được kể bằng ngôn ngữ ngắn gọn, dễ hiểu.",
+      "Mỗi chiếc xe Poseidon sử dụng groupset Shimano chính hãng Nhật Bản, khung Magie/Nhôm đạt chuẩn công nghiệp và được kiểm tra chất lượng trước khi đến tay khách hàng.",
   },
   {
-    eyebrow: "Craft",
-    title: "Thẩm mỹ kỹ thuật số tinh gọn",
+    eyebrow: "Thiết kế",
+    title: "Công nghệ đúc nguyên khối, nhẹ và bền",
     description:
-      "Thiết kế giao diện ưu tiên typography mạnh, card lớn và ánh sáng mềm để tạo cảm giác showroom online.",
+      "Khung Magie đúc nguyên khối giúp giảm trọng lượng xuống chỉ từ 12,3 kg, loại bỏ mối hàn yếu và tăng độ cứng vững cho cả hành trình dài lẫn tốc độ cao.",
   },
   {
-    eyebrow: "Network",
-    title: "Bán hàng dựa trên mạng lưới",
+    eyebrow: "Cam kết",
+    title: "Bảo hành 5 năm, hỗ trợ trọn đời",
     description:
-      "Trang đại lý không bị bỏ quên mà trở thành một trong những điểm chốt chuyển đổi quan trọng của hệ thống.",
+      "Poseidon cam kết bảo hành khung xe 5 năm, hỗ trợ kỹ thuật 24/7 và mạng lưới đại lý toàn quốc sẵn sàng phục vụ bảo dưỡng, thay thế linh kiện.",
   },
 ];
 
 export const aboutTimeline = [
   {
     year: "2018",
-    title: "Định hình concept",
+    title: "Khởi nguồn thương hiệu",
     description:
-      "Xác lập định hướng thương hiệu xe đạp mang cảm hứng đại dương, hiện đại và gần gũi với rider Việt Nam.",
+      "Poseidon ra đời từ niềm đam mê xe đạp và khát vọng mang đến sản phẩm chất lượng quốc tế với giá phù hợp thị trường Việt Nam.",
   },
   {
-    year: "2021",
-    title: "Mở rộng danh mục",
+    year: "2020",
+    title: "Đột phá khung Magie",
     description:
-      "Từ road và MTB, hệ sản phẩm dần bổ sung touring và xe gấp để phủ nhiều nhu cầu sử dụng hơn.",
+      "Ứng dụng công nghệ đúc Magie nguyên khối, giảm trọng lượng khung xuống chỉ từ 12,3 kg — bước tiến lớn trong phân khúc tầm trung.",
   },
   {
-    year: "2024",
-    title: "Tăng tốc nhận diện",
+    year: "2023",
+    title: "Mạng lưới 120+ đại lý",
     description:
-      "Đầu tư mạnh hơn cho catalogue, hình ảnh và không gian trưng bày số nhằm hỗ trợ bán hàng đa kênh.",
+      "Mở rộng hệ thống phân phối toàn quốc với hơn 120 đại lý ủy quyền, từ Hà Nội đến Cần Thơ, đảm bảo dịch vụ hậu mãi sát người dùng.",
   },
   {
-    year: "2026",
-    title: "Làm mới hệ sinh thái web",
+    year: "2025",
+    title: "Hoàn thiện hệ sinh thái",
     description:
-      "Phiên bản Next.js này đặt nền cho website nhanh hơn, đẹp hơn và dễ vận hành nội dung hơn.",
+      "Ra mắt đầy đủ 4 dòng xe (Gấp, MTB, Hybrid, Road) cùng nền tảng số mới, phục vụ tư vấn và đặt hàng trực tuyến.",
   },
 ];
 
 export const dealerRegions = [
   {
     name: "Miền Bắc",
-    count: 28,
-    cities: ["Hà Nội", "Hải Phòng", "Quảng Ninh"],
+    count: 35,
+    cities: ["Hà Nội", "Hải Phòng", "Quảng Ninh", "Bắc Ninh"],
   },
   {
     name: "Miền Trung",
-    count: 18,
-    cities: ["Đà Nẵng", "Huế", "Nha Trang"],
+    count: 25,
+    cities: ["Đà Nẵng", "Huế", "Nha Trang", "Quy Nhơn"],
   },
   {
     name: "Miền Nam",
-    count: 42,
-    cities: ["TP.HCM", "Cần Thơ", "Biên Hòa"],
+    count: 60,
+    cities: ["TP.HCM", "Cần Thơ", "Biên Hòa", "Bình Dương"],
   },
 ];
 
 export const dealerBenefits = [
   {
     icon: Store,
-    title: "Chính sách trưng bày rõ",
+    title: "Hỗ trợ trưng bày & POSM",
     description:
-      "Dễ phát triển thành block mô tả hỗ trợ biển bảng, POSM và guideline visual trưng bày tại đại lý.",
+      "Poseidon cung cấp biển hiệu, standee, catalogue và hướng dẫn bài trí showroom chuẩn thương hiệu — giúp đại lý tạo ấn tượng chuyên nghiệp ngay từ ngày đầu.",
   },
   {
     icon: ShieldCheck,
-    title: "Hậu mãi và bảo hành",
+    title: "Bảo hành 5 năm, hỗ trợ kỹ thuật",
     description:
-      "Khu vực này phù hợp để kể dịch vụ hậu mãi, chính sách bảo hành khung và hỗ trợ kỹ thuật sau bán.",
+      "Chính sách bảo hành khung xe 5 năm, linh kiện 12 tháng. Đội ngũ kỹ thuật hỗ trợ xử lý bảo hành nhanh trong 48 giờ trên toàn quốc.",
   },
   {
     icon: Bike,
-    title: "Danh mục dễ bán",
+    title: "Danh mục đa dạng, biên lợi nhuận tốt",
     description:
-      "Có thể nhấn mạnh các model chiến lược theo vùng, nhóm khách hàng và tỉ lệ doanh số mục tiêu.",
+      "4 dòng xe phủ mọi phân khúc từ xe gấp đô thị đến road cao cấp. Chính sách giá sỉ cạnh tranh, chiết khấu theo sản lượng và hỗ trợ hàng trưng bày.",
   },
 ];
 
 export const dealerList = [
   {
     region: "Miền Bắc",
-    name: "Poseidon Flagship Hà Nội",
+    name: "Poseidon Hà Nội — Cầu Giấy",
     address: "68 Trần Duy Hưng, Cầu Giấy, Hà Nội",
     phone: "0988 221 456",
-    specialty: "Road / MTB cao cấp",
-    note: "Có khu test-fit và hẹn tư vấn cuối tuần.",
+    specialty: "Đầy đủ dòng xe, khu vực test ride",
+    note: "Showroom chính Hà Nội, hỗ trợ tư vấn size & lắp ráp tại chỗ.",
   },
   {
     region: "Miền Trung",
-    name: "Poseidon Central Hub",
+    name: "Poseidon Đà Nẵng — Hải Châu",
     address: "125 Nguyễn Văn Linh, Hải Châu, Đà Nẵng",
     phone: "0905 672 118",
-    specialty: "Touring / Gravel / phụ kiện",
-    note: "Phù hợp khách đi tour dài và nhóm đạp cuối tuần.",
+    specialty: "MTB, Hybrid & phụ kiện",
+    note: "Trung tâm phân phối khu vực miền Trung, giao hàng nhanh các tỉnh lân cận.",
   },
   {
     region: "Miền Nam",
-    name: "Poseidon Saigon Experience",
+    name: "Poseidon TP.HCM — Bình Thạnh",
     address: "312 Điện Biên Phủ, Bình Thạnh, TP.HCM",
     phone: "0938 080 929",
-    specialty: "Urban / Fold / commuter",
-    note: "Có giao xe nhanh trong ngày cho khu vực nội thành.",
+    specialty: "Xe gấp, Road & dịch vụ bảo dưỡng",
+    note: "Showroom lớn nhất hệ thống, giao xe trong ngày nội thành TP.HCM.",
   },
 ];
 

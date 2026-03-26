@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 
 import { WaveAnimation } from "@/components/ui/wave-animation-1";
-import { SectionHeading } from "@/components/poseidon/section-heading";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -241,7 +240,7 @@ export function ProductCatalog() {
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-contain p-2"
+                        className="object-cover object-center"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                       <div className="absolute left-3 top-3 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary backdrop-blur-sm">

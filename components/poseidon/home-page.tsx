@@ -165,7 +165,7 @@ export function HomePage() {
                     src={category.image}
                     alt={category.name}
                     fill
-                    className="object-contain p-2"
+                    className="object-cover object-center"
                     sizes="(max-width: 768px) 100vw, 25vw"
                   />
                 </div>
@@ -228,7 +228,7 @@ export function HomePage() {
                     src={product.image}
                     alt={product.name}
                     fill
-                    className="object-contain p-2"
+                    className="object-cover object-center"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="absolute left-3 top-3 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary backdrop-blur-sm">
