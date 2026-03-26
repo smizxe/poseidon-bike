@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, PhoneCall, Store, Waves } from "lucide-react";
+import { ArrowRight, PhoneCall, Store } from "lucide-react";
 
 import {
   darkOutlineLinkClass,
@@ -16,12 +17,15 @@ export function SiteFooter() {
       <div className="section-shell relative py-16">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.9fr]">
           <div className="space-y-5">
-            <div className="flex items-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-full bg-white/10">
-                <Waves className="size-5 text-sky-300" />
-              </div>
+            <div className="space-y-3">
+              <Image
+                src="/brand/poseidon-logo-white.png"
+                alt="Poseidon"
+                width={1055}
+                height={408}
+                className="h-11 w-auto"
+              />
               <div>
-                <div className="font-heading text-2xl font-semibold">Poseidon Bikes</div>
                 <div className="text-sm text-slate-300">
                   Thương hiệu xe đạp cảm hứng đại dương.
                 </div>
