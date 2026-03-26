@@ -176,27 +176,31 @@ export function HomePage() {
           <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {categories.map((category, index) => (
               <Reveal key={category.slug} variant="soft" delay={index * 70}>
-                <Card className="panel relative overflow-hidden border-border/70 bg-card/90 py-0">
-                  <CardHeader className="pb-0">
-                    <div className="eyebrow w-fit">{category.shortLabel}</div>
-                    <CardTitle className="font-heading text-2xl">{category.name}</CardTitle>
+                <Card className="group relative flex h-full overflow-visible border border-sky-950/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.78),rgba(227,237,248,0.9))] py-0 text-slate-900 shadow-[0_28px_70px_-42px_rgba(53,92,133,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/42 dark:text-white dark:shadow-[0_26px_80px_-48px_rgba(15,23,42,0.78)]">
+                  <CardHeader className="space-y-4 px-4 pb-0 pt-8">
+                    <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-sky-300/40 bg-[linear-gradient(180deg,rgba(233,246,255,0.95),rgba(204,228,247,0.92))] px-4 py-1.5 text-[0.68rem] font-semibold tracking-[0.28em] text-sky-600 uppercase shadow-[0_12px_28px_-18px_rgba(14,165,233,0.65)] dark:border-sky-300/18 dark:bg-sky-400/8 dark:text-sky-300 dark:shadow-[0_10px_28px_-16px_rgba(14,165,233,0.4)]">
+                      {category.shortLabel}
+                    </div>
+                    <CardTitle className="font-heading text-[2rem] leading-[1.02] tracking-tight text-slate-900 dark:text-white">
+                      {category.name}
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-5 pb-6 pt-2">
-                    <p className="text-sm leading-7 text-muted-foreground">
+                  <CardContent className="flex flex-1 flex-col gap-5 px-4 pb-6 pt-3">
+                    <p className="min-h-[96px] text-[0.96rem] leading-8 text-slate-600 dark:text-slate-300">
                       {category.description}
                     </p>
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted/30">
+                    <div className="relative mt-auto aspect-[1.18/1] overflow-hidden rounded-[1.85rem] border border-white/70 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] dark:border-white/8 dark:bg-white">
                       <Image
                         src={category.image}
                         alt={category.name}
                         fill
-                        className="object-cover object-center"
+                        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.035]"
                         sizes="(max-width: 768px) 100vw, 25vw"
                       />
                     </div>
                     <Link
                       href="/san-pham"
-                      className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-sky-600 transition-colors hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200"
                     >
                       Xem dòng xe
                       <ArrowRight className="size-4" />
