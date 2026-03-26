@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CircleCheckBig, ShieldCheck, Store } from "lucide-react";
 
+import { CountUp } from "@/components/count-up";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/poseidon/section-heading";
 import { WaveAnimation } from "@/components/ui/wave-animation-1";
@@ -15,6 +16,24 @@ import {
   products,
   stats,
 } from "@/lib/site-data";
+
+function parseStatValue(value: string) {
+  const match = value.match(/(\D*)(\d+)(.*)/);
+
+  if (!match) {
+    return {
+      prefix: "",
+      end: 0,
+      suffix: value,
+    };
+  }
+
+  return {
+    prefix: match[1],
+    end: Number(match[2]),
+    suffix: match[3],
+  };
+}
 
 export function HomePage() {
   return (
@@ -81,7 +100,7 @@ export function HomePage() {
                   <Reveal key={item.label} variant="soft" delay={300 + index * 70}>
                     <div className="rounded-[1.7rem] border border-white/10 bg-slate-950/45 p-5 backdrop-blur-md">
                       <div className="font-heading text-3xl font-semibold tracking-tight text-white">
-                        {item.value}
+                        <CountUp {...parseStatValue(item.value)} />
                       </div>
                       <div className="mt-2 text-sm leading-6 text-slate-300">{item.label}</div>
                     </div>
