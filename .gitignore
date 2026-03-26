@@ -31,7 +31,10 @@ yarn-error.log*
 .pnpm-debug.log*
 dev.log
 dev.err
-*.png
+hero-bike-fixed.png
+hero-bike-preview-dark.png
+poseidon-header-light.png
+poseidon-home-hero*.png
 
 # env files (can opt-in for committing if needed)
 .env*
