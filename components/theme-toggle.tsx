@@ -7,15 +7,55 @@ import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+type ViewTransitionCapableDocument = Document & {
+  startViewTransition?: (callback: () => void | Promise<void>) => unknown;
+};
+
 export function ThemeToggle({ className }: { className?: string }) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+  const transitionTimeoutRef = React.useRef<number | null>(null);
 
   React.useEffect(() => {
     setMounted(true);
+
+    return () => {
+      if (transitionTimeoutRef.current) {
+        window.clearTimeout(transitionTimeoutRef.current);
+      }
+    };
   }, []);
 
   const isDark = mounted && resolvedTheme === "dark";
+  const handleToggle = React.useCallback(() => {
+    const root = document.documentElement;
+    const nextTheme = isDark ? "light" : "dark";
+
+    const finishTransition = () => {
+      if (transitionTimeoutRef.current) {
+        window.clearTimeout(transitionTimeoutRef.current);
+      }
+
+      transitionTimeoutRef.current = window.setTimeout(() => {
+        root.classList.remove("theme-animating");
+      }, 520);
+    };
+
+    root.classList.add("theme-animating");
+
+    const transitionDocument = document as ViewTransitionCapableDocument;
+
+    if (transitionDocument.startViewTransition) {
+      transitionDocument.startViewTransition(() => {
+        setTheme(nextTheme);
+      });
+      finishTransition();
+      return;
+    }
+
+    setTheme(nextTheme);
+    finishTransition();
+  }, [isDark, setTheme]);
 
   return (
     <Button
@@ -27,7 +67,7 @@ export function ThemeToggle({ className }: { className?: string }) {
         "rounded-full border-border/70 bg-background/80 backdrop-blur-sm hover:bg-accent",
         className,
       )}
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={handleToggle}
     >
       <SunMedium
         className={cn(

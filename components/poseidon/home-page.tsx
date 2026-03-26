@@ -120,10 +120,10 @@ export function HomePage() {
                   </div>
                   <div className="absolute inset-x-0 top-[12%] z-10">
                     <Image
-                      src="/brand/poseidon-hero-bike-cutout.png"
+                      src="/brand/poseidon-hero-bike-png.png"
                       alt="Xe đạp road Poseidon"
-                      width={2363}
-                      height={1397}
+                      width={2560}
+                      height={1708}
                       priority
                       className="animate-float-bike h-auto w-full mix-blend-multiply brightness-[1.08] contrast-[1.06] saturate-[1.08] drop-shadow-[0_30px_80px_rgba(37,99,235,0.28)]"
                     />
@@ -176,9 +176,9 @@ export function HomePage() {
           <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {categories.map((category, index) => (
               <Reveal key={category.slug} variant="soft" delay={index * 70}>
-                <Card className="group relative flex h-full overflow-visible border border-sky-950/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.78),rgba(227,237,248,0.9))] py-0 text-slate-900 shadow-[0_28px_70px_-42px_rgba(53,92,133,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/42 dark:text-white dark:shadow-[0_26px_80px_-48px_rgba(15,23,42,0.78)]">
+                <Card className="category-showcase-card group relative flex h-full overflow-visible py-0 backdrop-blur-xl">
                   <CardHeader className="space-y-4 px-4 pb-0 pt-8">
-                    <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-sky-300/40 bg-[linear-gradient(180deg,rgba(233,246,255,0.95),rgba(204,228,247,0.92))] px-4 py-1.5 text-[0.68rem] font-semibold tracking-[0.28em] text-sky-600 uppercase shadow-[0_12px_28px_-18px_rgba(14,165,233,0.65)] dark:border-sky-300/18 dark:bg-sky-400/8 dark:text-sky-300 dark:shadow-[0_10px_28px_-16px_rgba(14,165,233,0.4)]">
+                    <div className="category-showcase-tag absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full px-4 py-1.5 text-[0.68rem] font-semibold tracking-[0.28em] uppercase">
                       {category.shortLabel}
                     </div>
                     <CardTitle className="font-heading text-[2rem] leading-[1.02] tracking-tight text-slate-900 dark:text-white">
