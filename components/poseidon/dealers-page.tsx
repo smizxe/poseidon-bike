@@ -1,222 +1,228 @@
-import Link from "next/link";
-import { Building2, CircleDashed, MapPinned, PhoneCall, Users } from "lucide-react";
+"use client";
 
-import { SectionHeading } from "@/components/poseidon/section-heading";
+import * as React from "react";
+import { MapPin, Phone, Search, Store } from "lucide-react";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  lightOnDarkLinkClass,
-  outlineLinkClass,
-  primaryLinkClass,
-} from "@/lib/button-styles";
-import { dealerBenefits, dealerList, dealerRegions } from "@/lib/site-data";
+import { DealerDirectoryItem } from "@/lib/dealer-directory";
+import { cn } from "@/lib/utils";
 
-export function DealersPage() {
+interface DealersPageProps {
+  dealers: DealerDirectoryItem[];
+  provinces: string[];
+}
+
+function normalizeText(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+export function DealersPage({ dealers, provinces }: DealersPageProps) {
+  const [query, setQuery] = React.useState("");
+  const [provinceFilter, setProvinceFilter] = React.useState("Tất cả");
+
+  const filteredDealers = React.useMemo(() => {
+    const normalizedQuery = normalizeText(query);
+
+    return dealers.filter((dealer) => {
+      const matchesProvince =
+        provinceFilter === "Tất cả" || dealer.province === provinceFilter;
+      const searchableText = normalizeText(
+        `${dealer.province} ${dealer.storeName} ${dealer.phone} ${dealer.address}`,
+      );
+      const matchesQuery = !normalizedQuery || searchableText.includes(normalizedQuery);
+
+      return matchesProvince && matchesQuery;
+    });
+  }, [dealers, provinceFilter, query]);
+
   return (
     <div className="pb-20 pt-28 md:pt-32">
       <section className="section-shell">
-        <div className="panel relative overflow-hidden px-6 py-8 md:px-10 md:py-10">
-          <div className="absolute inset-0 ocean-grid opacity-35" />
-          <div className="relative grid gap-10 lg:grid-cols-[0.92fr_1.08fr]">
-            <div className="space-y-5">
-              <div className="eyebrow">
-                <MapPinned className="size-3.5" />
-                Hệ thống đại lý
+        <div className="panel overflow-hidden px-6 py-8 md:px-8">
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div className="space-y-3">
+                <div className="eyebrow">Hệ thống đại lý</div>
+                <div className="space-y-3">
+                  <h1 className="section-title max-w-4xl text-balance">
+                    Tra cứu cửa hàng Poseidon theo khu vực, tên shop hoặc hotline.
+                  </h1>
+                  <p className="section-copy max-w-3xl">
+                    Trang này chỉ tập trung vào dữ liệu tra cứu. Bạn có thể tìm nhanh theo tỉnh
+                    thành, tên cửa hàng hoặc số điện thoại để ra đúng đại lý cần liên hệ.
+                  </p>
+                </div>
               </div>
-              <h1 className="font-heading text-4xl leading-tight font-semibold tracking-tight md:text-6xl">
-                120+ đại lý ủy quyền trên toàn quốc
-              </h1>
-              <p className="max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
-                Dù bạn ở Hà Nội, Đà Nẵng hay TP.HCM — luôn có một showroom
-                Poseidon gần bạn để xem xe, test ride và nhận tư vấn chọn size
-                phù hợp.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/san-pham"
-                  className={`${primaryLinkClass} px-6`}
-                >
-                  Xem sản phẩm
-                </Link>
-                <Link
-                  href="/ve-chung-toi"
-                  className={`${outlineLinkClass} px-6`}
-                >
-                  Về thương hiệu
-                </Link>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                <SummaryStat label="Điểm bán" value={`${dealers.length}`} />
+                <SummaryStat label="Tỉnh thành" value={`${provinces.length}`} />
+                <SummaryStat label="Kết quả" value={`${filteredDealers.length}`} />
               </div>
             </div>
 
-            <div className="panel-dark relative min-h-[360px] overflow-hidden p-6">
-              <div className="absolute inset-0 soft-spotlight opacity-70" />
-              <div className="relative h-full rounded-[1.8rem] border border-white/10 bg-slate-950/60 p-6">
-                <div className="mb-6 flex items-center justify-between gap-3">
-                  <div>
-                    <div className="text-sm tracking-[0.2em] text-sky-200 uppercase">
-                      Phân phối toàn quốc
-                    </div>
-                    <div className="font-heading text-3xl font-semibold">
-                      3 vùng — 120+ điểm bán
-                    </div>
-                  </div>
-                  <CircleDashed className="size-10 text-sky-300" />
+            <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto]">
+              <label className="flex items-center gap-3 rounded-[1.5rem] border border-border/70 bg-background/72 px-4 py-3 shadow-[0_18px_45px_-34px_rgba(37,99,235,0.18)]">
+                <Search className="size-4 text-muted-foreground" />
+                <input
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Tìm theo tỉnh thành, tên cửa hàng, hotline hoặc địa chỉ"
+                  className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                />
+              </label>
+
+              <div className="flex flex-wrap gap-2">
+                {["Tất cả", ...provinces].map((province) => (
+                  <button
+                    key={province}
+                    type="button"
+                    onClick={() => setProvinceFilter(province)}
+                    className={cn(
+                      "rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+                      provinceFilter === province
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border/70 bg-background/72 text-foreground hover:border-primary/35 hover:bg-primary/6",
+                    )}
+                  >
+                    {province}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell pt-8">
+        <Card className="panel overflow-hidden py-0">
+          <CardHeader className="border-b border-border/60 bg-background/55">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div>
+                <CardTitle className="font-heading text-2xl">Danh sách đại lý</CardTitle>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Hiện có {filteredDealers.length} kết quả phù hợp với bộ lọc hiện tại.
+                </p>
+              </div>
+            </div>
+          </CardHeader>
+
+          <CardContent className="p-0">
+            {filteredDealers.length > 0 ? (
+              <>
+                <div className="hidden overflow-x-auto lg:block">
+                  <table className="w-full min-w-[920px] text-sm">
+                    <thead className="bg-background/78">
+                      <tr className="text-left text-muted-foreground">
+                        <th className="px-6 py-4 font-medium">Khu vực</th>
+                        <th className="px-6 py-4 font-medium">Cửa hàng</th>
+                        <th className="px-6 py-4 font-medium">Hotline</th>
+                        <th className="px-6 py-4 font-medium">Địa chỉ</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredDealers.map((dealer, index) => (
+                        <tr
+                          key={dealer.id}
+                          className={cn(
+                            "border-t border-border/60 transition-colors hover:bg-primary/4",
+                            index % 2 === 0 ? "bg-background/35" : "bg-transparent",
+                          )}
+                        >
+                          <td className="px-6 py-5 align-top">
+                            <span className="inline-flex rounded-full border border-primary/18 bg-primary/8 px-3 py-1 text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+                              {dealer.province}
+                            </span>
+                          </td>
+                          <td className="px-6 py-5 align-top">
+                            <div className="flex items-start gap-3">
+                              <div className="mt-0.5 rounded-xl border border-border/70 bg-background/85 p-2">
+                                <Store className="size-4 text-primary" />
+                              </div>
+                              <div className="font-medium text-foreground">{dealer.storeName}</div>
+                            </div>
+                          </td>
+                          <td className="px-6 py-5 align-top">
+                            <a
+                              href={`tel:${dealer.phone.replace(/[^0-9+]/g, "")}`}
+                              className="inline-flex items-center gap-2 font-medium text-foreground transition-colors hover:text-primary"
+                            >
+                              <Phone className="size-4 text-primary" />
+                              {dealer.phone}
+                            </a>
+                          </td>
+                          <td className="px-6 py-5 align-top text-muted-foreground">
+                            <div className="flex items-start gap-2 leading-7">
+                              <MapPin className="mt-1 size-4 shrink-0 text-primary" />
+                              <span>{dealer.address}</span>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
 
-                <div className="relative mx-auto mt-8 h-[210px] max-w-[420px] rounded-[1.8rem] border border-white/10 bg-white/4">
-                  <div className="absolute left-[27%] top-[20%] size-4 rounded-full bg-sky-300 shadow-[0_0_0_10px_rgba(125,211,252,0.14)]" />
-                  <div className="absolute left-[46%] top-[42%] size-4 rounded-full bg-blue-300 shadow-[0_0_0_10px_rgba(96,165,250,0.14)]" />
-                  <div className="absolute left-[63%] top-[62%] size-4 rounded-full bg-cyan-300 shadow-[0_0_0_10px_rgba(103,232,249,0.14)]" />
-                  <div className="absolute inset-y-0 left-[28%] w-px bg-gradient-to-b from-transparent via-white/35 to-transparent" />
-                  <div className="absolute inset-y-0 left-[47%] w-px bg-gradient-to-b from-transparent via-white/35 to-transparent" />
-                  <div className="absolute inset-x-0 top-[42%] h-px bg-gradient-to-r from-transparent via-white/35 to-transparent" />
-                </div>
-
-                <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                  {dealerRegions.map((region) => (
+                <div className="grid gap-4 p-4 lg:hidden">
+                  {filteredDealers.map((dealer) => (
                     <div
-                      key={region.name}
-                      className="rounded-[1.4rem] border border-white/10 bg-white/5 p-4"
+                      key={dealer.id}
+                      className="rounded-[1.6rem] border border-border/70 bg-background/72 p-4 shadow-[0_20px_50px_-38px_rgba(15,23,42,0.22)]"
                     >
-                      <div className="text-sm font-medium">{region.name}</div>
-                      <div className="mt-0.5 font-heading text-lg font-semibold text-sky-200">
-                        {region.count} đại lý
+                      <div className="mb-3 flex items-center justify-between gap-3">
+                        <span className="inline-flex rounded-full border border-primary/18 bg-primary/8 px-3 py-1 text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+                          {dealer.province}
+                        </span>
+                        <Store className="size-4 text-primary" />
                       </div>
-                      <div className="mt-1 text-xs text-slate-400">
-                        {region.cities.join(" • ")}
+
+                      <div className="space-y-3">
+                        <div className="font-heading text-xl font-semibold text-foreground">
+                          {dealer.storeName}
+                        </div>
+                        <a
+                          href={`tel:${dealer.phone.replace(/[^0-9+]/g, "")}`}
+                          className="inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-primary"
+                        >
+                          <Phone className="size-4 text-primary" />
+                          {dealer.phone}
+                        </a>
+                        <div className="flex items-start gap-2 text-sm leading-7 text-muted-foreground">
+                          <MapPin className="mt-1 size-4 shrink-0 text-primary" />
+                          <span>{dealer.address}</span>
+                        </div>
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell py-20">
-        <SectionHeading
-          eyebrow="Tại sao chọn Poseidon"
-          title="Quyền lợi khi trở thành đại lý ủy quyền"
-          description="Poseidon đồng hành cùng đại lý từ ngày đầu mở bán — từ hỗ trợ trưng bày, đào tạo kỹ thuật đến chính sách hậu mãi minh bạch."
-          align="center"
-        />
-
-        <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          {dealerBenefits.map((benefit) => (
-            <Card key={benefit.title} className="panel py-0">
-              <CardHeader>
-                <benefit.icon className="mb-4 size-10 text-primary" />
-                <CardTitle className="font-heading text-2xl">{benefit.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="pb-6">
-                <p className="text-sm leading-7 text-muted-foreground">
-                  {benefit.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-shell pb-20">
-        <SectionHeading
-          eyebrow="Showroom tiêu biểu"
-          title="Ghé thăm showroom gần bạn"
-          description="Xem xe trực tiếp, test ride tại chỗ và được tư vấn chọn size bởi đội ngũ am hiểu sản phẩm."
-          align="center"
-        />
-
-        <div className="mt-12 grid gap-5 xl:grid-cols-3">
-          {dealerList.map((dealer) => (
-            <Card key={dealer.name} className="panel py-0">
-              <CardHeader>
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="text-xs tracking-[0.2em] text-primary uppercase">
-                      {dealer.region}
-                    </div>
-                    <CardTitle className="mt-2 font-heading text-2xl">
-                      {dealer.name}
-                    </CardTitle>
-                  </div>
-                  <Building2 className="size-8 text-primary" />
+              </>
+            ) : (
+              <div className="flex min-h-[280px] flex-col items-center justify-center gap-3 px-6 py-16 text-center">
+                <div className="rounded-2xl border border-border/70 bg-background/72 p-3">
+                  <Search className="size-5 text-primary" />
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-4 pb-6">
-                <div className="text-sm leading-7 text-muted-foreground">
-                  {dealer.address}
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-[1.2rem] border border-border/60 bg-background/70 p-4">
-                    <div className="mb-1 text-xs tracking-[0.18em] text-primary uppercase">
-                      Hotline
-                    </div>
-                    <div className="font-medium">{dealer.phone}</div>
-                  </div>
-                  <div className="rounded-[1.2rem] border border-border/60 bg-background/70 p-4">
-                    <div className="mb-1 text-xs tracking-[0.18em] text-primary uppercase">
-                      Thế mạnh
-                    </div>
-                    <div className="font-medium">{dealer.specialty}</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Users className="size-4 text-primary" />
-                  {dealer.note}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-shell">
-        <div className="panel-dark px-6 py-8 md:px-10">
-          <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
-            <div className="space-y-4">
-              <div className="eyebrow border-sky-300/25 bg-sky-300/10 text-sky-200">
-                Hợp tác kinh doanh
-              </div>
-              <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-5xl">
-                Trở thành đại lý ủy quyền Poseidon
-              </h2>
-              <p className="max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
-                Bạn đang kinh doanh xe đạp hoặc muốn mở đại lý? Liên hệ ngay
-                để nhận thông tin chính sách hợp tác, bảng giá sỉ và hỗ trợ mở
-                showroom từ đội ngũ Poseidon.
-              </p>
-            </div>
-
-            <div className="rounded-[1.8rem] border border-white/10 bg-white/6 p-6">
-              <div className="mb-3 text-sm tracking-[0.18em] text-sky-200 uppercase">
-                Liên hệ hợp tác
-              </div>
-              <div className="space-y-4 text-sm leading-7 text-slate-300">
-                <p>
-                  <span className="font-medium text-white">Hotline đại lý:</span>{" "}
-                  1900 63 99 63
-                </p>
-                <p>
-                  <span className="font-medium text-white">Email:</span>{" "}
-                  dealer@poseidonbike.vn
-                </p>
-                <p>
-                  <span className="font-medium text-white">Giờ tư vấn:</span>{" "}
-                  08:30 — 20:30 mỗi ngày, kể cả cuối tuần
+                <div className="font-heading text-2xl font-semibold">Không tìm thấy kết quả</div>
+                <p className="max-w-md text-sm leading-7 text-muted-foreground">
+                  Thử đổi từ khóa tìm kiếm hoặc chuyển sang khu vực khác để xem danh sách đại lý.
                 </p>
               </div>
-              <div className="mt-6">
-                <Link
-                  href="tel:19006399​63"
-                  className={lightOnDarkLinkClass}
-                >
-                  <PhoneCall className="size-4" />
-                  Gọi tư vấn ngay
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+            )}
+          </CardContent>
+        </Card>
       </section>
+    </div>
+  );
+}
+
+function SummaryStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-[1.4rem] border border-border/70 bg-background/72 px-4 py-4 text-center shadow-[0_18px_45px_-34px_rgba(37,99,235,0.18)]">
+      <div className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">{label}</div>
+      <div className="mt-2 font-heading text-3xl font-semibold tracking-tight">{value}</div>
     </div>
   );
 }

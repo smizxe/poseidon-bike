@@ -19,7 +19,7 @@ export function CatalogProductCard({
   product,
   showAction = true,
   actionHref,
-  actionLabel = "Tu van",
+  actionLabel = "Tư vấn",
   className,
 }: CatalogProductCardProps) {
   return (
@@ -80,13 +80,13 @@ export function CatalogProductCard({
           {showAction ? (
             <>
               <Link href="/dai-ly" className={cn(outlineLinkClass, "px-4")}>
-                Tu van
+                Tư vấn
               </Link>
               <Link
                 href={actionHref || `/san-pham/${product.slug}`}
                 className={cn(primaryLinkClass, "px-4")}
               >
-                {actionLabel === "Tu van" ? "Xem chi tiet" : actionLabel}
+                {actionLabel === "Tư vấn" ? "Xem chi tiết" : actionLabel}
                 <ArrowRight className="size-4" />
               </Link>
             </>
