@@ -1,29 +1,27 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Bike,
-  CircleHelp,
-  Filter,
-  Search,
-  Store,
-  Waves,
-} from "lucide-react";
+import { CircleHelp, Filter, Search, Store, Waves } from "lucide-react";
 
+import { CatalogProductCard } from "@/components/poseidon/catalog-product-card";
 import { Reveal } from "@/components/reveal";
 import { WaveAnimation } from "@/components/ui/wave-animation-1";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { categories, products } from "@/lib/site-data";
+import { CatalogProduct, ProductCategorySummary } from "@/lib/catalog-types";
 import { cn } from "@/lib/utils";
 
 const defaultValue = "Tất cả";
 
-export function ProductCatalog() {
+export function ProductCatalog({
+  products,
+  categories,
+}: {
+  products: CatalogProduct[];
+  categories: ProductCategorySummary[];
+}) {
   const [search, setSearch] = React.useState("");
   const [category, setCategory] = React.useState(defaultValue);
 
@@ -34,7 +32,7 @@ export function ProductCatalog() {
       normalizedSearch.length === 0 ||
       product.name.toLowerCase().includes(normalizedSearch) ||
       product.tagline.toLowerCase().includes(normalizedSearch);
-    const matchesCategory = category === defaultValue || product.category === category;
+    const matchesCategory = category === defaultValue || product.categorySlug === category;
 
     return matchesSearch && matchesCategory;
   });
@@ -67,8 +65,8 @@ export function ProductCatalog() {
             </Reveal>
             <Reveal delay={160}>
               <p className="max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
-                Từ xe gấp đô thị gọn nhẹ, MTB chinh phục địa hình đến road tốc độ cao,
-                tất cả đều mang tinh thần đại dương mạnh mẽ và rõ cá tính.
+                Từ xe gấp đô thị gọn nhẹ, MTB chinh phục địa hình đến road tốc độ cao, tất cả
+                đều mang tinh thần đại dương mạnh mẽ và rõ cá tính.
               </p>
             </Reveal>
 
@@ -114,10 +112,7 @@ export function ProductCatalog() {
                   </div>
 
                   <div className="space-y-2">
-                    <label
-                      htmlFor="catalog-search"
-                      className="text-sm font-medium text-foreground"
-                    >
+                    <label htmlFor="catalog-search" className="text-sm font-medium text-foreground">
                       Tìm theo tên xe
                     </label>
                     <div className="relative">
@@ -147,27 +142,23 @@ export function ProductCatalog() {
                       >
                         Tất cả ({products.length})
                       </button>
-                      {categories.map((item) => {
-                        const count = products.filter((p) => p.category === item.slug).length;
-
-                        return (
-                          <button
-                            key={item.slug}
-                            type="button"
-                            onClick={() =>
-                              setCategory(category === item.slug ? defaultValue : item.slug)
-                            }
-                            className={cn(
-                              "w-full rounded-full border px-4 py-2.5 text-left text-sm transition-colors",
-                              category === item.slug
-                                ? "border-primary bg-primary/10 font-medium text-primary"
-                                : "border-border/60 bg-background/70 text-muted-foreground hover:border-primary/30",
-                            )}
-                          >
-                            {item.name} ({count})
-                          </button>
-                        );
-                      })}
+                      {categories.map((item) => (
+                        <button
+                          key={item.slug}
+                          type="button"
+                          onClick={() =>
+                            setCategory(category === item.slug ? defaultValue : item.slug)
+                          }
+                          className={cn(
+                            "w-full rounded-full border px-4 py-2.5 text-left text-sm transition-colors",
+                            category === item.slug
+                              ? "border-primary bg-primary/10 font-medium text-primary"
+                              : "border-border/60 bg-background/70 text-muted-foreground hover:border-primary/30",
+                          )}
+                        >
+                          {item.name} ({item.count})
+                        </button>
+                      ))}
                     </div>
                   </div>
 
@@ -192,12 +183,10 @@ export function ProductCatalog() {
               <Card className="panel-dark py-0">
                 <CardContent className="space-y-4 p-5">
                   <div className="glass-pill w-fit">Hỗ trợ chọn xe</div>
-                  <h3 className="font-heading text-2xl font-semibold">
-                    Chưa biết bắt đầu từ đâu?
-                  </h3>
+                  <h3 className="font-heading text-2xl font-semibold">Chưa biết bắt đầu từ đâu?</h3>
                   <p className="text-sm leading-7 text-slate-300">
-                    Liên hệ đại lý gần bạn để được tư vấn trực tiếp, test ride và nhận
-                    hỗ trợ chọn size xe phù hợp.
+                    Liên hệ đại lý gần bạn để được tư vấn trực tiếp, test ride và nhận hỗ trợ
+                    chọn size xe phù hợp.
                   </p>
                   <Link
                     href="/dai-ly"
@@ -221,9 +210,7 @@ export function ProductCatalog() {
                   <div className="text-sm text-muted-foreground">
                     Hiển thị {filteredProducts.length} mẫu xe
                   </div>
-                  <div className="mt-1 font-heading text-2xl font-semibold">
-                    Bộ sưu tập Poseidon
-                  </div>
+                  <div className="mt-1 font-heading text-2xl font-semibold">Bộ sưu tập Poseidon</div>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -251,73 +238,7 @@ export function ProductCatalog() {
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {filteredProducts.map((product, index) => (
                 <Reveal key={product.slug} variant="soft" delay={(index % 3) * 70}>
-                  <Card className="panel group relative overflow-hidden py-0">
-                    <CardContent className="space-y-4 p-5">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted/30">
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          fill
-                          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                        />
-                        <div className="absolute left-3 top-3 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary backdrop-blur-sm">
-                          {product.badge}
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between gap-4">
-                          <div className="text-xs tracking-[0.18em] text-primary uppercase">
-                            {product.categoryLabel}
-                          </div>
-                          <div className="text-xs text-muted-foreground">{product.weight}</div>
-                        </div>
-
-                        <h3 className="font-heading text-2xl font-semibold">{product.name}</h3>
-                        <p className="text-sm leading-7 text-muted-foreground">
-                          {product.tagline}
-                        </p>
-                      </div>
-
-                      <div className="flex flex-wrap gap-1.5">
-                        {product.specs.map((spec) => (
-                          <span
-                            key={spec}
-                            className="rounded-full border border-border/60 bg-muted/50 px-3 py-1 text-xs text-muted-foreground"
-                          >
-                            {spec}
-                          </span>
-                        ))}
-                      </div>
-
-                      <div className="space-y-2 rounded-[1.5rem] border border-border/60 bg-background/70 p-4">
-                        {product.highlights.slice(0, 4).map((item) => (
-                          <div
-                            key={item}
-                            className="flex items-start gap-2 text-sm text-muted-foreground"
-                          >
-                            <Bike className="mt-0.5 size-4 shrink-0 text-primary" />
-                            {item}
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="flex items-end justify-between gap-4 pt-2">
-                        <div className="text-sm text-muted-foreground">
-                          {product.frame} &middot; {product.wheelSize}
-                        </div>
-
-                        <Link
-                          href="/dai-ly"
-                          className={cn(buttonVariants({ size: "lg" }), "rounded-full")}
-                        >
-                          Tư vấn
-                          <ArrowRight className="size-4" />
-                        </Link>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  <CatalogProductCard product={product} />
                 </Reveal>
               ))}
             </div>
@@ -330,8 +251,7 @@ export function ProductCatalog() {
                       Chưa có mẫu xe phù hợp bộ lọc hiện tại
                     </div>
                     <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                      Bạn hãy đổi bộ lọc hoặc xóa điều kiện tìm kiếm để xem lại toàn bộ
-                      catalogue.
+                      Bạn hãy đổi bộ lọc hoặc xóa điều kiện tìm kiếm để xem lại toàn bộ catalogue.
                     </p>
                   </CardContent>
                 </Card>

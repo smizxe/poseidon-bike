@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Poseidon Bikes Next.js
 
-## Getting Started
+Web marketing site cho Poseidon kèm admin CRUD sản phẩm, dùng `Next.js + Tailwind + shadcn/ui + Supabase`.
 
-First, run the development server:
+## Chạy local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Mở [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Biến môi trường
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tạo file `.env.local` từ `.env.example`:
 
-## Learn More
+```bash
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET=product-media
+```
 
-To learn more about Next.js, take a look at the following resources:
+Ý nghĩa:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `NEXT_PUBLIC_SUPABASE_URL`: URL project Supabase
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: key public để đọc dữ liệu ở frontend/server public
+- `SUPABASE_SERVICE_ROLE_KEY`: key admin để CRUD sản phẩm và upload ảnh từ route admin
+- `NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET`: bucket chứa ảnh sản phẩm, mặc định là `product-media`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Setup Supabase
 
-## Deploy on Vercel
+Chạy SQL theo thứ tự:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. [supabase/01_schema.sql](D:/Project%20Code%20Kiem%20Tien/xe%20dap%20poseidon/poseidon-next/supabase/01_schema.sql)
+2. [supabase/02_seed.sql](D:/Project%20Code%20Kiem%20Tien/xe%20dap%20poseidon/poseidon-next/supabase/02_seed.sql)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Schema hiện có:
+
+- `products`
+- `product_specifications`
+- `product_colors`
+- `product_color_images`
+- bucket storage `product-media`
+
+## Route chính
+
+- `/`: trang chủ
+- `/san-pham`: catalogue sản phẩm
+- `/san-pham/[slug]`: trang chi tiết sản phẩm
+- `/ve-chung-toi`: trang giới thiệu
+- `/dai-ly`: trang đại lý
+- `/admin/products`: admin quản lý sản phẩm
+
+## Admin sản phẩm
+
+Trang admin hiện hỗ trợ:
+
+- tạo, sửa, xóa sản phẩm
+- chỉnh nội dung card catalogue
+- preview card realtime ở cột phải
+- chỉnh trang chi tiết sản phẩm
+- quản lý thông số kỹ thuật
+- dòng nào không nhập sẽ tự ẩn ở trang chi tiết
+- quản lý màu sắc chung cho từng sản phẩm
+- upload nhiều ảnh cho từng màu
+- ảnh upload lên Supabase Storage
+
+## Lưu ý
+
+- Nếu chưa cấu hình Supabase, site public vẫn chạy bằng dữ liệu fallback để demo UI.
+- CRUD và upload trong admin chỉ hoạt động khi đã có đủ env Supabase.
+- Hiện tại admin chưa có lớp đăng nhập/phân quyền; nếu deploy public nên bổ sung auth trước khi mở route admin.
+
+## Kiểm tra
+
+```bash
+npm run lint
+npm run build
+```

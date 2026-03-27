@@ -3,19 +3,20 @@ import Link from "next/link";
 import { ArrowRight, CircleCheckBig, ShieldCheck, Store } from "lucide-react";
 
 import { CountUp } from "@/components/count-up";
+import { CatalogProductCard } from "@/components/poseidon/catalog-product-card";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/poseidon/section-heading";
-import { WaveAnimation } from "@/components/ui/wave-animation-1";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { outlineLinkClass, primaryLinkClass } from "@/lib/button-styles";
-import {
-  categories,
-  homeHighlights,
-  newsItems,
-  processSteps,
-  products,
-  stats,
-} from "@/lib/site-data";
+import { WaveAnimation } from "@/components/ui/wave-animation-1";
+import { primaryLinkClass } from "@/lib/button-styles";
+import { CatalogProduct, ProductCategorySummary } from "@/lib/catalog-types";
+import { homeHighlights, newsItems, processSteps, stats } from "@/lib/site-data";
+
+interface HomePageProps {
+  featuredProducts: CatalogProduct[];
+  categorySummaries: ProductCategorySummary[];
+  productCount: number;
+}
 
 function parseStatValue(value: string) {
   const match = value.match(/(\D*)(\d+)(.*)/);
@@ -35,11 +36,24 @@ function parseStatValue(value: string) {
   };
 }
 
-export function HomePage() {
+export function HomePage({
+  featuredProducts,
+  categorySummaries,
+  productCount,
+}: HomePageProps) {
+  const heroStats = stats.map((item, index) =>
+    index === 0
+      ? {
+          ...item,
+          value: String(productCount),
+        }
+      : item,
+  );
+
   return (
     <div className="pb-20">
-      <section className="relative min-h-screen overflow-hidden bg-slate-950 pt-18 text-white md:pt-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(56,189,248,0.12),transparent_24%),radial-gradient(circle_at_82%_20%,rgba(59,130,246,0.18),transparent_28%)]" />
+      <section className="relative min-h-screen overflow-hidden bg-slate-900 pt-18 text-white md:pt-20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(56,189,248,0.25),transparent_32%),radial-gradient(circle_at_82%_20%,rgba(59,130,246,0.32),transparent_38%),radial-gradient(circle_at_50%_50%,rgba(148,163,184,0.06),transparent_50%)]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[850px]">
           <WaveAnimation
             height={850}
@@ -96,7 +110,7 @@ export function HomePage() {
               </Reveal>
 
               <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                {stats.map((item, index) => (
+                {heroStats.map((item, index) => (
                   <Reveal key={item.label} variant="soft" delay={300 + index * 70}>
                     <div className="rounded-[1.7rem] border border-white/10 bg-slate-950/45 p-5 backdrop-blur-md">
                       <div className="font-heading text-3xl font-semibold tracking-tight text-white">
@@ -112,7 +126,7 @@ export function HomePage() {
             <div className="space-y-4">
               <Reveal variant="zoom" delay={120}>
                 <div className="relative min-h-[420px] overflow-visible lg:min-h-[560px]">
-                  <div className="absolute inset-x-[8%] top-[12%] h-[58%] rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.35),rgba(37,99,235,0.18)_38%,transparent_72%)] blur-3xl" />
+                  <div className="absolute inset-x-[5%] top-[10%] h-[62%] rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.55),rgba(37,99,235,0.32)_40%,transparent_72%)] blur-3xl" />
                   <div className="absolute left-[12%] right-[10%] top-3 z-10 flex justify-end">
                     <div className="rounded-full border border-white/10 bg-white/7 px-3 py-1 text-[11px] font-medium tracking-[0.18em] text-white/80 uppercase backdrop-blur-md">
                       Aero Collection
@@ -125,7 +139,7 @@ export function HomePage() {
                       width={2560}
                       height={1708}
                       priority
-                      className="animate-float-bike h-auto w-full mix-blend-multiply brightness-[1.08] contrast-[1.06] saturate-[1.08] drop-shadow-[0_30px_80px_rgba(37,99,235,0.28)]"
+                      className="animate-float-bike h-auto w-full brightness-[1.35] contrast-[1.1] saturate-[1.15] drop-shadow-[0_30px_80px_rgba(56,189,248,0.4)]"
                     />
                   </div>
                   <div className="absolute inset-x-[14%] bottom-[15%] h-px bg-gradient-to-r from-transparent via-sky-200/35 to-transparent" />
@@ -174,7 +188,7 @@ export function HomePage() {
           </Reveal>
 
           <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {categories.map((category, index) => (
+            {categorySummaries.map((category, index) => (
               <Reveal key={category.slug} variant="soft" delay={index * 70}>
                 <Card className="category-showcase-card group relative flex h-full overflow-visible py-0 backdrop-blur-xl">
                   <CardHeader className="space-y-4 px-4 pb-0 pt-8">
@@ -199,7 +213,7 @@ export function HomePage() {
                       />
                     </div>
                     <Link
-                      href="/san-pham"
+                      href={`/san-pham?category=${category.slug}`}
                       className="inline-flex items-center gap-2 text-sm font-medium text-sky-600 transition-colors hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200"
                     >
                       Xem dòng xe
@@ -231,9 +245,7 @@ export function HomePage() {
                   <div className="rounded-[1.8rem] border border-white/10 bg-white/6 p-5">
                     <item.icon className="mb-4 size-10 text-sky-300" />
                     <h3 className="font-heading text-xl font-semibold">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-slate-300">
-                      {item.description}
-                    </p>
+                    <p className="mt-3 text-sm leading-7 text-slate-300">{item.description}</p>
                   </div>
                 </Reveal>
               ))}
@@ -253,49 +265,13 @@ export function HomePage() {
         </Reveal>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {products.slice(0, 6).map((product, index) => (
+          {featuredProducts.map((product, index) => (
             <Reveal key={product.slug} variant="soft" delay={(index % 3) * 80}>
-              <Card className="panel py-0">
-                <CardContent className="space-y-4 p-5">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted/30">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover object-center"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="absolute left-3 top-3 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary backdrop-blur-sm">
-                      {product.badge}
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
-                      {product.categoryLabel}
-                    </div>
-                    <h3 className="font-heading text-xl font-semibold">{product.name}</h3>
-                    <p className="text-sm leading-7 text-muted-foreground">{product.tagline}</p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {product.specs.map((spec) => (
-                      <span
-                        key={spec}
-                        className="rounded-full border border-border/60 bg-muted/50 px-3 py-1 text-xs text-muted-foreground"
-                      >
-                        {spec}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-between gap-4 pt-2">
-                    <div className="text-sm font-medium text-muted-foreground">
-                      {product.weight} &middot; {product.wheelSize}
-                    </div>
-                    <Link href="/san-pham" className={outlineLinkClass}>
-                      Xem chi tiết
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
+              <CatalogProductCard
+                product={product}
+                actionHref={`/san-pham/${product.slug}`}
+                actionLabel="Xem chi tiết"
+              />
             </Reveal>
           ))}
         </div>
@@ -336,7 +312,7 @@ export function HomePage() {
             <div className="space-y-6">
               <Reveal>
                 <SectionHeading
-                  eyebrow="Tin tức & cẩm nang"
+                  eyebrow="Tin tức & cảm nang"
                   title="Kiến thức dành cho rider mới và người đang nâng cấp xe"
                   description="Tổng hợp bài viết hữu ích giúp bạn chọn xe, bảo dưỡng và tận hưởng hành trình đạp xe."
                 />
