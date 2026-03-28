@@ -37,10 +37,10 @@ export const categories = [
     image: "/products/ps300.jpg",
   },
   {
-    slug: "hybrid",
-    name: "Xe thể thao đường phố",
-    shortLabel: "Hybrid",
-    description: "Khung Magie đúc nguyên khối, nhẹ và bền cho hành trình dài và luyện tập thể thao.",
+    slug: "touring",
+    name: "Xe đường dài Touring",
+    shortLabel: "Touring",
+    description: "Bền bỉ trên mọi hành trình, tối ưu cho những chuyến đi xa và hành trình khám phá dài ngày.",
     image: "/products/ps600.jpg",
   },
   {
@@ -56,8 +56,8 @@ export const products = [
   {
     slug: "poseidon-ps250",
     name: "Poseidon PS250",
-    category: "hybrid",
-    categoryLabel: "Hybrid",
+    category: "touring",
+    categoryLabel: "Touring",
     image: "/products/ps250.jpg",
     gallery: ["/products/ps250.jpg", "/products/ps250-2.jpg", "/products/ps250-3.jpg"],
     tagline: "Khung nhôm 6061, càng Magie đúc nguyên khối, Shimano 2x8 và phanh dầu MT200 cho nhu cầu đi phố lẫn touring nhẹ.",
@@ -149,8 +149,8 @@ export const products = [
   {
     slug: "poseidon-ps600",
     name: "Poseidon PS600",
-    category: "hybrid",
-    categoryLabel: "Hybrid",
+    category: "touring",
+    categoryLabel: "Touring",
     image: "/products/ps600.jpg",
     gallery: ["/products/ps600.jpg", "/products/ps600-2.jpg", "/products/ps600-3.jpg"],
     tagline: "Khung-càng Magie đúc nguyên khối, phanh dầu Shimano MT200 — nhẹ chỉ 13,6 kg.",
@@ -353,7 +353,7 @@ export const aboutTimeline = [
     year: "2025",
     title: "Hoàn thiện hệ sinh thái",
     description:
-      "Ra mắt đầy đủ 4 dòng xe (Gấp, MTB, Hybrid, Road) cùng nền tảng số mới, phục vụ tư vấn và đặt hàng trực tuyến.",
+      "Ra mắt đầy đủ 4 dòng xe (Gấp, MTB, Touring, Road) cùng nền tảng số mới, phục vụ tư vấn và đặt hàng trực tuyến.",
   },
 ];
 
@@ -410,7 +410,7 @@ export const dealerList = [
     name: "Poseidon Đà Nẵng — Hải Châu",
     address: "125 Nguyễn Văn Linh, Hải Châu, Đà Nẵng",
     phone: "0905 672 118",
-    specialty: "MTB, Hybrid & phụ kiện",
+    specialty: "MTB, Touring & phụ kiện",
     note: "Trung tâm phân phối khu vực miền Trung, giao hàng nhanh các tỉnh lân cận.",
   },
   {

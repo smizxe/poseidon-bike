@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { CircleHelp, Filter, Search, Store, Waves } from "lucide-react";
 
 import { CatalogProductCard } from "@/components/poseidon/catalog-product-card";
@@ -41,8 +42,14 @@ export function ProductCatalog({
     <div className="pb-20 pt-28 md:pt-32">
       <section className="section-shell">
         <div className="panel-dark relative overflow-hidden px-6 py-8 md:px-10 md:py-10">
-          <div className="absolute inset-0 ocean-grid opacity-20" />
-          <div className="absolute inset-x-0 bottom-0 h-[58%] opacity-65">
+          <Image
+            src="/brand/anh-phu-homepage.jpg"
+            alt="Poseidon background"
+            fill
+            className="object-cover opacity-45 brightness-[0.8] contrast-[1.1]"
+          />
+          <div className="absolute inset-0 bg-slate-950/40" />
+          <div className="absolute inset-x-0 bottom-0 h-[58%] opacity-45">
             <WaveAnimation
               className="w-full"
               height={460}

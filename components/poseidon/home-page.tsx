@@ -68,8 +68,9 @@ export function HomePage({
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 to-transparent" />
 
         <div className="section-shell relative flex min-h-[calc(100svh-5.35rem)] items-center py-8 md:py-10">
-          <div className="grid w-full items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="space-y-8">
+          <div className="grid w-full items-center gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+            <div className="relative isolate space-y-8">
+              <div className="absolute -inset-y-12 -left-12 -right-8 -z-10 rounded-[3rem] bg-slate-950/50 blur-3xl lg:-left-20 lg:-right-16 lg:bg-slate-950/65" />
               <div className="space-y-6">
                 <Reveal delay={80}>
                   <h1 className="font-heading text-5xl leading-[0.93] font-semibold tracking-tight sm:text-6xl lg:text-7xl xl:text-[5.35rem]">
@@ -125,8 +126,8 @@ export function HomePage({
 
             <div className="space-y-4">
               <Reveal variant="zoom" delay={120}>
-                <div className="relative min-h-[420px] overflow-visible lg:min-h-[560px]">
-                  <div className="absolute inset-x-[5%] top-[10%] h-[62%] rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.55),rgba(37,99,235,0.32)_40%,transparent_72%)] blur-3xl" />
+                <div className="relative min-h-[550px] overflow-visible lg:min-h-[850px]">
+                  <div className="absolute inset-x-[5%] top-[10%] h-[62%] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.45),rgba(37,99,235,0.22)_40%,transparent_72%)] blur-3xl" />
                   <div className="absolute left-[12%] right-[10%] top-3 z-10 flex justify-end">
                     <div className="rounded-full border border-white/10 bg-white/7 px-3 py-1 text-[11px] font-medium tracking-[0.18em] text-white/80 uppercase backdrop-blur-md">
                       Aero Collection
@@ -134,42 +135,17 @@ export function HomePage({
                   </div>
                   <div className="absolute inset-x-0 top-[12%] z-10">
                     <Image
-                      src="/brand/poseidon-hero-bike-png.png"
+                      src="/brand/poseidon-hero-bike-v2.png"
                       alt="Xe đạp road Poseidon"
                       width={2560}
                       height={1708}
                       priority
-                      className="animate-float-bike h-auto w-full brightness-[1.35] contrast-[1.1] saturate-[1.15] drop-shadow-[0_30px_80px_rgba(56,189,248,0.4)]"
+                      className="animate-float-bike h-auto w-full scale-[1.1] brightness-[1.1] contrast-[1.05] saturate-[1.1] drop-shadow-[0_30px_80px_rgba(56,189,248,0.4)] lg:scale-[1.2] lg:translate-x-8"
                     />
                   </div>
                   <div className="absolute inset-x-[14%] bottom-[15%] h-px bg-gradient-to-r from-transparent via-sky-200/35 to-transparent" />
                 </div>
               </Reveal>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <Reveal variant="soft" delay={220}>
-                  <div className="rounded-[1.8rem] border border-white/10 bg-slate-950/58 p-5 backdrop-blur-md">
-                    <div className="mb-3 text-xs font-semibold tracking-[0.22em] text-sky-200 uppercase">
-                      Khung khí động học
-                    </div>
-                    <p className="text-sm leading-7 text-slate-300">
-                      Tối ưu độ ổn định ở tốc độ cao, phù hợp cả những hành trình luyện tập
-                      lẫn các chặng đường dài cuối tuần.
-                    </p>
-                  </div>
-                </Reveal>
-                <Reveal variant="soft" delay={300}>
-                  <div className="rounded-[1.8rem] border border-white/10 bg-slate-950/58 p-5 backdrop-blur-md">
-                    <div className="mb-3 text-xs font-semibold tracking-[0.22em] text-sky-200 uppercase">
-                      Bảo hành rõ ràng
-                    </div>
-                    <p className="text-sm leading-7 text-slate-300">
-                      Chính sách hậu mãi minh bạch, hỗ trợ kỹ thuật nhanh và mạng lưới đại lý
-                      sẵn sàng đồng hành sau khi bạn nhận xe.
-                    </p>
-                  </div>
-                </Reveal>
-              </div>
             </div>
           </div>
         </div>
@@ -229,7 +205,14 @@ export function HomePage({
 
       <section className="section-shell pb-20">
         <div className="panel-dark relative overflow-hidden px-6 py-8 md:px-10">
-          <div className="absolute inset-0 ocean-grid opacity-25" />
+          <Image
+            src="/brand/anh-phu-homepage.jpg"
+            alt="Poseidon background"
+            fill
+            className="object-cover opacity-45 brightness-[0.8] contrast-[1.1]"
+          />
+          <div className="absolute inset-0 bg-slate-950/40" />
+          <div className="absolute inset-0 ocean-grid opacity-20" />
           <div className="relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <Reveal>
               <SectionHeading

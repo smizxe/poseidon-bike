@@ -220,7 +220,7 @@ function fallbackColorHex(categorySlug: string) {
       return "#d6dee8";
     case "mtb":
       return "#0f172a";
-    case "hybrid":
+    case "touring":
       return "#1f2937";
     case "road":
       return "#1d4ed8";

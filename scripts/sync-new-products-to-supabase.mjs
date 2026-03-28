@@ -46,13 +46,13 @@ const products = [
   {
     slug: "poseidon-ps250",
     name: "Poseidon PS250",
-    categorySlug: "hybrid",
-    categoryLabel: "Hybrid",
+    categorySlug: "touring",
+    categoryLabel: "Touring",
     badge: "Commuter",
     cardDescription:
-      "Khung nhôm 6061, càng Magie đúc nguyên khối, Shimano 2x8 và phanh dầu MT200 cho nhu cầu đi phố lẫn touring nhẹ.",
+      "Khung nhôm 6061, càng Magie đúc nguyên khối, Shimano 2x8 và phanh dầu MT200 cho nhu cầu touring và hành trình dài.",
     detailDescription:
-      "Poseidon PS250 là mẫu flat-bar linh hoạt cho đô thị, fitness và touring nhẹ. Khung nhôm 6061 kết hợp càng Magie đúc nguyên khối giúp chiếc xe giữ cảm giác lái chắc chắn, trong khi cấu hình Shimano 2x8 và phanh dầu MT200 đem lại sự ổn định cho cả đi làm hằng ngày lẫn những chuyến đi xa cuối tuần.",
+      "Poseidon PS250 là mẫu xe Touring thực thụ, cân bằng giữa độ bền bỉ, tư thế lái thoải mái cho những hành trình xuyên Việt và khám phá. Khung nhôm 6061 kết hợp càng Magie đúc nguyên khối giúp chiếc xe giữ cảm giác lái chắc chắn, trong khi cấu hình Shimano 2x8 và phanh dầu MT200 đem lại sự ổn định tuyệt vời cho cả đi làm hằng ngày lẫn những chuyến đi xa cuối tuần.",
     weight: "14 kg",
     wheelSize: "700x32c (~28 inch)",
     frameSummary: "Nhôm 6061 + càng Magie · 700x32c",
@@ -245,13 +245,13 @@ const products = [
   {
     slug: "poseidon-ps600",
     name: "Poseidon PS600",
-    categorySlug: "hybrid",
-    categoryLabel: "Hybrid",
+    categorySlug: "touring",
+    categoryLabel: "Touring",
     badge: "Best Seller",
     cardDescription:
-      "Khung-càng Magie đúc nguyên khối, phanh dầu Shimano MT200 - nhẹ chỉ 13,6 kg.",
+      "Khung-càng Magie đúc nguyên khối, phanh dầu Shimano MT200 — Touring nhẹ nhàng chỉ 13,6 kg.",
     detailDescription:
-      "Poseidon PS600 là mẫu hybrid thiên về đi phố và tập luyện thể thao với chất xe nhẹ, phản hồi nhanh và tư thế lái dễ chịu. Bộ khung-càng Magie đúc nguyên khối giúp tổng thể cứng vững hơn, trong khi Shimano 3x8 và phanh dầu MT200 đem lại cảm giác sử dụng ổn định cho nhu cầu hằng ngày.",
+      "Poseidon PS600 là mẫu Touring hiện đại với khung-càng Magie đúc nguyên khối, tối ưu trọng lượng cho những chuyến đi xa mà không mệt mỏi. Chất xe nhẹ, phản hồi nhanh và tư thế lái dễ chịu kết hợp cùng Shimano 3x8 và phanh dầu MT200 đem lại cảm giác sử dụng ổn định tuyệt vời.",
     weight: "13,6 kg",
     wheelSize: "700x32c (~28 inch)",
     frameSummary: "Magie đúc nguyên khối · 700x32c",
